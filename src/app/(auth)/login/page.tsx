@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage({ searchParams }: any) {
@@ -64,12 +64,20 @@ export default function LoginPage({ searchParams }: any) {
           >
             {isLoading ? "Loading..." : "Login to your account"}
           </button>
+          <hr />
+          <button
+            type="button"
+            onClick={() => signIn('google', { callbackUrl, redirect: false })}
+            className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Login With Google
+          </button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
             Not registered? <Link href="/register" className="text-blue-700 hover:underline dark:text-blue-500">Create
               account</Link>
           </div>
         </form>
       </div>
-    </div>
+    </div >
   )
 }
